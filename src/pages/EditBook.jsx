@@ -1,53 +1,54 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import BackButton from '../components/BackButton';
+import Spinner from '../components/Spinner';
 import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
 
 const EditBook = () => {
-  const { id } = useParams();
-  const history = useHistory();
-  const { enqueueSnackbar } = useSnackbar();
-
   const [title, setTitle] = useState('');
   const [author, setAuthor] = useState('');
   const [publishYear, setPublishYear] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
+  const {id} = useParams();
+  const { enqueueSnackbar } = useSnackbar();
 
   useEffect(() => {
-    const fetchBook = async () => {
-      try {
-        const response = await axios.get(`${process.env.REACT_APP_BACKEND_URL}/books/${id}`);
-        setTitle(response.data.title);
-        setAuthor(response.data.author);
-        setPublishYear(response.data.publishYear);
-      } catch (error) {
-        enqueueSnackbar('Error fetching book data', { variant: 'error' });
-        console.log(error);
-      }
-    };
-
-    fetchBook();
-  }, [id, enqueueSnackbar]);
-
-  const handleEditBook = async () => {
     setLoading(true);
-
+    axios.get(`http://localhost:5555/books/${id}`)
+    .then((response) => {
+        setAuthor(response.data.author);
+        setPublishYear(response.data.publishYear)
+        setTitle(response.data.title)
+        setLoading(false);
+      }).catch((error) => {
+        setLoading(false);
+        alert('An error happened. Please Chack console');
+        console.log(error);
+      });
+  }, [])
+  
+  const handleEditBook = () => {
     const data = {
       title,
       author,
       publishYear,
     };
-
-    try {
-      await axios.put(`${process.env.REACT_APP_BACKEND_URL}/books/${id}`, data);
-      setLoading(false);
-      enqueueSnackbar('Book Edited successfully', { variant: 'success' });
-      history.push('/');
-    } catch (error) {
-      setLoading(false);
-      enqueueSnackbar('Error', { variant: 'error' });
-      console.log(error);
-    }
+    setLoading(true);
+    axios
+      .put(`http://localhost:5555/books/${id}`, data)
+      .then(() => {
+        setLoading(false);
+        enqueueSnackbar('Book Edited successfully', { variant: 'success' });
+        navigate('/');
+      })
+      .catch((error) => {
+        setLoading(false);
+        // alert('An error happened. Please Chack console');
+        enqueueSnackbar('Error', { variant: 'error' });
+        console.log(error);
+      });
   };
 
   return (
@@ -88,7 +89,7 @@ const EditBook = () => {
         </button>
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default EditBook;
+export default EditBook
