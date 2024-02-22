@@ -29,21 +29,21 @@ const DeleteBook = () => {
   };
   
   return (
-    <div className='p-4'>
-      <BackButton />
-      <h1 className='text-3xl my-4'>Delete Book</h1>
-      {loading ? <Spinner /> : ''}
-      <div className='flex flex-col items-center border-2 border-sky-400 rounded-xl w-[600px] p-8 mx-auto'>
-        <h3 className='text-2xl'>Are You Sure You want to delete this book?</h3>
+    <div className='container p-4'>
+  <BackButton />
+  <h1 className='text-3xl my-4'>Delete Book</h1>
+  {loading ? <Spinner /> : ''}
+  <div className='d-flex flex-column align-items-center border border-primary rounded-3 w-75 p-4 mx-auto'>
+    <h3 className='text-2xl'>Are You Sure You want to delete this book?</h3>
 
-        <button
-          className='p-4 bg-red-600 text-white m-8 w-full'
-          onClick={handleDeleteBook}
-        >
-          Yes, Delete it
-        </button>
-      </div>
-    </div>
+    <button
+      className='btn btn-danger p-4 text-white mt-4 w-100'
+      onClick={handleDeleteBook}
+    >
+      Yes, Delete it
+    </button>
+  </div>
+</div>
   )
 }
 
