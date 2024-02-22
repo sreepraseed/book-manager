@@ -16,15 +16,15 @@ const Home = () => {
   useEffect(() => {
     setLoading(true);
     axios
-  .get(process.env.REACT_APP_BACKEND_URL + '/books')
-  .then((response) => {
-    setBooks(response.data.data);
-    setLoading(false);
-  })
-  .catch((error) => {
-    console.log(error);
-    setLoading(false);
-  });
+      .get('http://localhost:5555/books')
+      .then((response) => {
+        setBooks(response.data.data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+      });
   }, []);
 
   return (
