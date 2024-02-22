@@ -26,38 +26,39 @@ const ShowBook = () => {
   return (
     <div className='container p-4'>
   <BackButton />
-  <h1 className='text-3xl my-4'>Show Book</h1>
+  <h1 className='display-3 my-4'>Show Book</h1>
   {loading ? (
     <Spinner />
   ) : (
-    <div className='d-flex flex-column border border-primary rounded-3 p-4'>
+    <div className='border border-primary rounded p-4'>
       <div className='my-4'>
-        <span className='text-xl mr-4 text-gray-500'>Id</span>
-        <span>{book._id}</span>
+        <h5 className='text-muted'>Id</h5>
+        <p className='lead'>{book._id}</p>
       </div>
       <div className='my-4'>
-        <span className='text-xl mr-4 text-gray-500'>Title</span>
-        <span>{book.title}</span>
+        <h5 className='text-muted'>Title</h5>
+        <p className='lead'>{book.title}</p>
       </div>
       <div className='my-4'>
-        <span className='text-xl mr-4 text-gray-500'>Author</span>
-        <span>{book.author}</span>
+        <h5 className='text-muted'>Author</h5>
+        <p className='lead'>{book.author}</p>
       </div>
       <div className='my-4'>
-        <span className='text-xl mr-4 text-gray-500'>Publish Year</span>
-        <span>{book.publishYear}</span>
+        <h5 className='text-muted'>Publish Year</h5>
+        <p className='lead'>{book.publishYear}</p>
       </div>
       <div className='my-4'>
-        <span className='text-xl mr-4 text-gray-500'>Create Time</span>
-        <span>{new Date(book.createdAt).toString()}</span>
+        <h5 className='text-muted'>Create Time</h5>
+        <p className='lead'>{new Date(book.createdAt).toString()}</p>
       </div>
       <div className='my-4'>
-        <span className='text-xl mr-4 text-gray-500'>Last Update Time</span>
-        <span>{new Date(book.updatedAt).toString()}</span>
+        <h5 className='text-muted'>Last Update Time</h5>
+        <p className='lead'>{new Date(book.updatedAt).toString()}</p>
       </div>
     </div>
   )}
 </div>
+
 
   );
 };
